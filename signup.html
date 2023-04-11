@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>회원가입</title>
+  <meta charset="utf-8">
+  <style>
+    /* 전체 폰트 설정 */
+    body {
+      font-family: sans-serif;
+    }
+
+    /* 제목 스타일 */
+    h1 {
+      margin-top: 50px;
+      margin-bottom: 30px;
+      font-size: 36px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* 폼 스타일 */
+    form {
+      width: 400px;
+      margin: 0 auto;
+    }
+
+    /* 라벨 스타일 */
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    /* 인풋 박스 스타일 */
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    /* 버튼 스타일 */
+    button[type="submit"], button[type="button"] {
+      display: block;
+      margin-top: 20px;
+      padding: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* 가입 버튼 스타일 */
+    button[type="submit"] {
+      width: 100%;
+    }
+
+    /* 취소 버튼 스타일 */
+    button[type="button"] {
+      width: 100%;
+      background-color: #dc3545;
+    }
+
+    /* 입력 에러 메시지 스타일 */
+    .error-message {
+      color: #dc3545;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    /* 입력 박스 에러 스타일 */
+    input.error {
+      border: 1px solid #dc3545;
+    }
+  </style>
+</head>
+<body>
+  <h1>회원가입</h1>
+  <form>
+    <label>
+      아이디:
+      <input type="text" id="username">
+    </label>
+    <label>
+      비밀번호:
+      <input type="password" id="password">
+    </label>
+    <button type="submit" id="register">가입하기</button>
+    <button type="button" id="cancel">취소</button>
+  </form>
+  <script>
+    // 이전 코드 생략
+
+    function registerUser(event) {
+      event.preventDefault();
+      var username = document.querySelector('#username').value;
+      var password = document.querySelector('#password').value;
+
+      // 유효성 검사 생략
+
+      if (!localStorage.getItem(username)) {
+        var user = { username: username, password: password, todos: [] };
+        localStorage.setItem(username, JSON.stringify(user));
+        alert('가입이 완료되었습니다. 로그인해주세요.');
+        location.href = 'index.html';
+      } else {
+        alert('이미 가입된 아이디입니다. 다른 아이디를 사용해주세요.');
+      }
+    }
+
+    var registerForm = document.querySelector('form');
+    registerForm.addEventListener('submit', registerUser);
+
+    var cancelButton = document.querySelector('#cancel');
+    cancelButton.addEventListener('click', function() {
+      location.href = 'index.html';
+    });
+  </script>
+</body>

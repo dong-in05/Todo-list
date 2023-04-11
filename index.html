@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: #f2f2f2;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+    h1 {
+      color: #333;
+      margin-top: 50px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #666;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    button {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    button[type="submit"] {
+      background-color: #3cb371;
+    }
+    button[type="submit"]:hover {
+      background-color: #2e8b57;
+    }
+    button[type="button"] {
+      background-color: #ccc;
+    }
+    button[type="button"]:hover {
+      background-color: #999;
+    }
+  </style>
+  <title>로그인</title>
+  <meta charset="utf-8">
+</head>
+<body>
+  <h1>로그인</h1>
+  <form>
+    <label>
+      아이디:
+      <input type="text" id="username">
+    </label>
+    <br>
+    <label>
+      비밀번호:
+      <input type="password" id="password">
+    </label>
+    <br>
+    <button type="submit" id="login">로그인</button>
+    <button type="button" id="signup">회원가입</button>
+  </form>
+  <script>
+    // 이전 코드 생략
+
+    function loginUser(event) {
+      event.preventDefault();
+      var username = document.querySelector('#username').value;
+      var password = document.querySelector('#password').value;
+
+      // 유효성 검사 생략
+
+      var user = JSON.parse(localStorage.getItem(username));
+      if (user && user.password === password) {
+        alert('로그인 되었습니다.');
+        localStorage.setItem('loggedInUser', username);
+        location.href = 'todolist.html';
+      } else {
+        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+      }
+    }
+
+    var loginForm = document.querySelector('form');
+    loginForm.addEventListener('submit', loginUser);
+
+    var signupButton = document.querySelector('#signup');
+    signupButton.addEventListener('click', function() {
+      location.href = 'signup.html';
+    });
+  </script>
+</body>
+</html>
